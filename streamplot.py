@@ -39,8 +39,9 @@ def animate(x, y):
     global xs
     global ys
 
-    if ':' in x:
-        args.x_axis_dates = True
+    if type(x) == type('string'):
+        if ':' in x:
+            args.x_axis_dates = True
 
     # Add x and y to lists
     #xs.append(dt.datetime.now().strftime('%H:%M:%S.%f'))
