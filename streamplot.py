@@ -39,6 +39,9 @@ def animate(x, y):
     global xs
     global ys
 
+    if ':' in x:
+        args.x_axis_dates = True
+
     # Add x and y to lists
     #xs.append(dt.datetime.now().strftime('%H:%M:%S.%f'))
     xs.append(x)
@@ -68,7 +71,6 @@ def animate(x, y):
 
 
 async def echo_server(reader, writer):
-    x=1
     while True:
         data = await reader.read(100)  # Max number of bytes to read
         if not data:
@@ -90,7 +92,7 @@ async def echo_server(reader, writer):
             y = dl[1]
 
         animate(x, y)
-
+        
     writer.close()
 
 async def init_server(host, port):
