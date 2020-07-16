@@ -34,6 +34,7 @@ ax = fig.add_subplot(args.num_plots, 1, 1)
 plt.ion()
 xs = []
 ys = []
+vals = []
 
 def animate(x, y):
     global xs
@@ -45,7 +46,12 @@ def animate(x, y):
     # Add x and y to lists
     #xs.append(dt.datetime.now().strftime('%H:%M:%S.%f'))
     xs.append(x)
-    ys.append(y)
+
+    if type(y) == type( [] ):
+        for n = range(args.num_plots):
+            ys[n] = ys[n].append(y[n])
+    else:
+        ys.append(y)
 
     # Limit x and y lists to 20 items
     if args.num_values_plot:
@@ -82,6 +88,7 @@ async def echo_server(reader, writer):
 
         # Update graph data
         dl = msg.split(sep=args.sep)
+<<<<<<< HEAD:streamplot.py
         try:
             x = float(dl[0])
         except:
@@ -93,6 +100,16 @@ async def echo_server(reader, writer):
 
         animate(x, y)
         
+=======
+        for n = range(args.num_plots):
+            try:
+                vals[n] = float(dl[n])
+            except:
+                vals[n] = dl[n]
+
+        animate(vals)
+
+>>>>>>> Move csvanim.py to streamplot.py:streamplot.py
     writer.close()
 
 async def init_server(host, port):
