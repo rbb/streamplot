@@ -88,19 +88,6 @@ async def echo_server(reader, writer):
 
         # Update graph data
         dl = msg.split(sep=args.sep)
-<<<<<<< HEAD:streamplot.py
-        try:
-            x = float(dl[0])
-        except:
-            x = dl[0]
-        try:
-            y = float(dl[1])
-        except:
-            y = dl[1]
-
-        animate(x, y)
-        
-=======
         for n = range(args.num_plots):
             try:
                 vals[n] = float(dl[n])
@@ -109,7 +96,6 @@ async def echo_server(reader, writer):
 
         animate(vals)
 
->>>>>>> Move csvanim.py to streamplot.py:streamplot.py
     writer.close()
 
 async def init_server(host, port):
